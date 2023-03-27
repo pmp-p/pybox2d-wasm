@@ -4,7 +4,6 @@
 *.swo
 *.swp
 *.so
-Box2D.py
 _Box2D.pyd
 /library/build
 /library/Box2D.egg-info
