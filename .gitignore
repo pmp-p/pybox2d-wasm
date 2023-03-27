@@ -1,8 +1,13 @@
-build/*
-dist/*
+/build/*
+/dist/*
 *.py[oc]
 *.swo
 *.swp
 *.so
 Box2D.py
 _Box2D.pyd
+/library/build
+/library/Box2D.egg-info
+/Box2D/Box2D_wrap.cpp
+/Box2D/Box2D_wrap.h
+*-pygbag.???

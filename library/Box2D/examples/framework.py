@@ -21,6 +21,8 @@
 """
 The framework's base is FrameworkBase. See its help for more information.
 """
+
+import asyncio
 from time import time
 
 from Box2D import (b2World, b2AABB, b2CircleShape, b2Color, b2Vec2)
@@ -510,7 +512,7 @@ def main(test_class):
     test = test_class()
     if fwSettings.onlyInit:
         return
-    test.run()
+    asyncio.run(test.run())
 
 
 if __name__ == '__main__':

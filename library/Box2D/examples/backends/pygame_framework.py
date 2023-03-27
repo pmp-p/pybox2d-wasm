@@ -38,7 +38,7 @@ Mouse:
 from __future__ import (print_function, absolute_import, division)
 import sys
 import warnings
-
+import asyncio
 import pygame
 from pygame.locals import (QUIT, KEYDOWN, KEYUP, MOUSEBUTTONDOWN,
                            MOUSEBUTTONUP, MOUSEMOTION, KMOD_LSHIFT)
@@ -331,7 +331,7 @@ class PygameFramework(FrameworkBase):
 
         return True
 
-    def run(self):
+    async def run(self):
         """
         Main loop.
 
@@ -365,6 +365,7 @@ class PygameFramework(FrameworkBase):
             pygame.display.flip()
             clock.tick(self.settings.hz)
             self.fps = clock.get_fps()
+            await asyncio.sleep(0)
 
         self.world.contactListener = None
         self.world.destructionListener = None
