@@ -1,12 +1,12 @@
-<html lang="en-us"><script src="https://pygame-web.github.io/pygbag/0.0/pythons.js" type=module id="site" data-os="vtx,fs,snd,gui" async defer>#<!--
+<html lang="en-us"><script src="https://pygame-web.github.io/pygbag/0.0/pythons.js" type=module id=site data-LINES=57 data-CONSOLE=25 data-python=python3.12 data-os=vtx,fs,snd,gui async defer>#<!--
 
 print("""
 Loading library from library.apk
-    Pygbag Version : 0.7.1
-    Template Version : 0.7.0
-    Python  : 3.11
+    Pygbag Version : 0.9.1
+    Template Version : 0.9.1
+    Python  : 3.12
     CDN URL : https://pygame-web.github.io/pygbag/0.0/
-    Screen  : {{cookiecutter.width}}x{{cookiecutter.height}}
+    Screen  : 1280x720
     Title   : library
     Folder  : library
     Authors : pgw
@@ -16,8 +16,8 @@ Loading library from library.apk
 
 
 # screen pixels (real, hardware)
-WIDTH=1024  # {{cookiecutter.width}}
-HEIGHT=600  # {{cookiecutter.height}}
+WIDTH=1024  # 1280
+HEIGHT=600  # 720
 
 # reference/idealized screen pixels
 REFX = 1980
@@ -235,7 +235,7 @@ asyncio.run( custom_site() )
 config = {
     xtermjs : "1" ,
     _sdl2 : "canvas",
-    user_canvas : 1,
+    user_canvas : 0,
     user_canvas_managed : 0,
     ume_block : 1,
     can_close : 0,
@@ -243,7 +243,7 @@ config = {
     gui_debug : 3,
     cdn : "https://pygame-web.github.io/pygbag/0.0/",
     autorun : 0,
-    PYBUILD : "3.11"
+    PYBUILD : "3.12"
 }
 
 </script>
@@ -259,8 +259,6 @@ config = {
     <link rel="prefetch" href="https://pygame-web.github.io/pygbag/0.0/pythonrc.py">
     <link rel="prefetch" href="https://pygame-web.github.io/pygbag/0.0/vt/xterm.js">
     <link rel="prefetch" href="https://pygame-web.github.io/pygbag/0.0/vt/xterm-addon-image.js">
-    <link rel="prefetch" href="https://pygame-web.github.io/pygbag/0.0/vt/xterm-addon-image.js">
-
 
     <link rel="icon" type="image/png" href="favicon.png" sizes="16x16">
 
@@ -289,7 +287,7 @@ config = {
             border: 0px none;
             background-color: transparent;
             width: 100%;
-            height=100%;
+            height: 100%;
             z-index: 5;
 
             padding: 0;
@@ -393,7 +391,8 @@ height="1px"
             <iframe id="iframe" class="framed" name="iframe"
 width="470px" height="90%"
 allowtransparency="true"
-style="z-index: 10; style="background: #FFFFFF;"
+style="z-index: 10;"
+style="background: #FFFFFF;"
 frameborder="1"
                 allowfullscreen="true"
                 webkitallowfullscreen="true"
@@ -421,7 +420,7 @@ frameborder="1"
     <script type="application/javascript">
 
     async function custom_onload(debug_hidden) {
-        // this is called before anythinh python is loaded
+        // this is called before anything python is loaded
         // make your js customization here
         console.log(__FILE__, "custom_onload")
 
@@ -430,6 +429,7 @@ frameborder="1"
         transfer.hidden = debug_hidden
         info.hidden = debug_hidden
         box.hidden =  debug_hidden
+
     }
 
     function custom_prerun(){
@@ -441,6 +441,14 @@ frameborder="1"
     function custom_postrun(){
         // python main and no VFS filesystem yet.
         console.log(__FILE__, "custom_postrun")
+
+        // prevent ff horizontal scroll
+        window.addEventListener("keydown", function(e) {
+            if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+                if (!python.config.debug)
+                    e.preventDefault();
+            }
+        }, false);
 
     }
 
