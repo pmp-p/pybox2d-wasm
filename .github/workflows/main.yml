@@ -13,7 +13,7 @@ jobs:
       run: |
             # git version
             python3 -m pip install pygbag
-            python3 -m pygbag --cdn https://pygame-web.github.io/pygbag/0.0/ --build $GITHUB_WORKSPACE/library/main.py
+            python3 -m pygbag --git --build $GITHUB_WORKSPACE/library/main.py
     - name : "Upload to GitHub pages"
       uses: JamesIves/github-pages-deploy-action@4.1.7
       with:
